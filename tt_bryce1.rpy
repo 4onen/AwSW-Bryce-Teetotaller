@@ -1,7 +1,7 @@
 init python: # Magmalink required!
     def tt_bryce1_link(ml):
         ml.find_label('waitmenu') \
-            .hook_call('tt_bryce1_variablesetup') \
+            .hook_call_to('tt_bryce1_variablesetup') \
             .search_menu("Nothing yet. I'll have something later, I think.") \
             .add_choice("Water for me.", jump='tt_bryce1_drink1_waterforme', condition='True') \
             .search_say("Noted. I'll be right back.") \
