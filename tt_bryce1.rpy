@@ -1,39 +1,33 @@
-init: #Linkmod required!
-    find label waitmenu
-    callto label tt_bryce1_variablesetup
-    search menu
-    add option "Water for me." to tt_bryce1_drink1_waterforme
-    search say "Noted. I'll be right back."
-    link tt_bryce1_canon_return_noted_brb
-
-    # drink1
-    search say "It wasn't long before the waiter returned with a drinking bowl as wide as it was tall, filled to the brim with a foam-topped, dark amber liquid. Carefully, he set it down in front of Bryce, who didn't hesitate to take a big gulp."
-    search if
-    add condition "tt_bryce1_water" to tt_bryce1_drink1_waterarrives
-    search say "There you go. Just call me if you need anything." 
-    link tt_bryce1_canon_return_afterdrink1
-
-    # drink2
-    search say "Here you go." for 300
-    search if for 20
-    add condition "tt_bryce1_dontdrink" to tt_bryce1_drink2_dontdrink
-    add condition "tt_bryce1_water and not tt_bryce1_dontdrink" to tt_bryce1_drink2_watered_down
-
-    # menu madness
-    branch "beer == False":
-        search menu
-        branch "Not really. I guess I can stay for a little while.":
-            search menu
-            branch "I don't really drink, though.":
-                search menu
-                add option "I don't drink" to tt_bryce1_drink2_pushy
-                add option "No." to tt_bryce1_drink2_no
-    
-    search say "You know what, why don't we have ourselves a drinking contest?"
-    link tt_bryce1_canon_return_contest
-
-    search menu
-    add option "No. Light drinking, please." to tt_bryce1_drink2_light
+init python: # Magmalink required!
+    def tt_bryce1_link(ml):
+        ml.find_label('waitmenu') \
+            .hook_call('tt_bryce1_variablesetup') \
+            .search_menu("Nothing yet. I'll have something later, I think.") \
+            .add_choice("Water for me.", jump='tt_bryce1_drink1_waterforme', condition='True') \
+            .search_say("Noted. I'll be right back.") \
+            .link_from('tt_bryce1_canon_return_noted_brb') \
+            .search_say("It wasn't long before the waiter returned with a drinking bowl as wide as it was tall, filled to the brim with a foam-topped, dark amber liquid. Carefully, he set it down in front of Bryce, who didn't hesitate to take a big gulp.") \
+            .search_if("beer == True") \
+            .add_entry("tt_bryce1_water == True", jump='tt_bryce1_drink1_waterarrives', after="beer == True") \
+            .search_say("There you go. Just call me if you need anything.") \
+            .link_from('tt_bryce1_canon_return_afterdrink1') \
+            .search_say("Here you go.",depth=300) \
+            .search_if("beer == False",depth=20) \
+            .add_entry("tt_bryce1_dontdrink == True", jump='tt_bryce1_drink2_dontdrink', before="beer == False") \
+            .add_entry("tt_bryce1_water == True", jump='tt_bryce1_drink2_watered_down', before="beer == False") \
+            .branch("beer == False") \
+                .search_menu("Not really. I guess I can stay for a little while.") \
+                .branch() \
+                    .search_menu("I don't really drink, though.") \
+                    .branch() \
+                        .search_menu("I'll try it just for you.") \
+                        .add_choice("I don't drink", jump='tt_bryce1_drink2_pushy', condition='True') \
+                        .add_choice("No.", jump='tt_bryce1_drink2_no', condition='True') \
+            .search_say("You know what, why don't we have ourselves a drinking contest?") \
+            .link_from('tt_bryce1_canon_return_contest') \
+            .search_menu("I would, but I don't think I can beat someone like you.") \
+            .add_choice("No. Light drinking, please.", jump='tt_bryce1_drink2_light', condition='True')
+    tt_bryce1_link(magmalink())
 
 label tt_bryce1_variablesetup:
 
@@ -47,15 +41,6 @@ python:
     tt_bryce1_drinkincident = None
 call tt_bryce1_minigame_variable_setup
 return
-
-label tt_returntocannon_link_fail(linkname):
-    play sound "fx/system3.wav"
-    s "Uh oh! Looks like a Teetotaller Bryce1 return-to-canon link didn't work."
-    play sound "fx/system3.wav"
-    s "This means I don't know what the next node will be, so {i}please{/i} don't click \"Ignore.\" Roll back a few frames, save, and contact the mod author."
-    play sound "fx/system3.wav"
-    s "Sorry about that. Crashing your game properly now. Remember, \"Rollback.\" The mod author can't help you or explain anything if you continue."
-    $ renpy.error("%r linkup failed."%linkname)
 
 label tt_bryce1_chapterover_teetotaller:
     if persistent.c1teetotaler == False and not beer:
@@ -76,10 +61,8 @@ label tt_bryce1_chapterover:
     $ brycescenesfinished = 1
     jump _mod_fixjmp
 
-label tt_bryce1_canon_return_leave:
-    # Linked to `c "I really think I should be going."` by the linkup scripts.
-    pass
-call tt_returntocannon_link_fail("tt_bryce1_canon_return_leave")
+# Linked to `c "I really think I should be going."` by the linkup scripts.
+jump tt_bryce1_canon_return_leave
 
 label tt_bryce1_drink1_waterforme:
     if brycemood >= 1:
@@ -128,10 +111,8 @@ label tt_bryce1_drink1_waterforme:
     if tt_bryce1_water == True:
         Br normal "Well, the usual for me and water for [player_name]."
 
-label tt_bryce1_canon_return_noted_brb:
-    # Linked to `Wr "Noted. I'll be right back."` by the linkup scripts.
-    pass
-call tt_returntocannon_link_fail("tt_bryce1_canon_return_noted_brb")
+# Linked to `Wr "Noted. I'll be right back."` by the linkup scripts.
+jump tt_bryce1_canon_return_noted_brb
 
 label tt_bryce1_dontdrink_callsite(tt_bryce1_talked_about_reza=False):
     Br brow "Just flat don't? Ever?"
@@ -224,13 +205,10 @@ label tt_bryce1_dontdrink_callsite(tt_bryce1_talked_about_reza=False):
     return
 
 label tt_bryce1_drink1_waterarrives:
-    # if beer == True:
-    #     $ renpy.error("Teetotaller consistency error: beer and water arrive at the same time? (**Ignore** may work, but will be weird.)")
     m "He brought my water as well, provided in a glass that seemed more appropriate for my kind."
-label tt_bryce1_canon_return_afterdrink1:
-    # Linked to `Wr "There you go. Just call me if you need anything."` by the linkup scripts
-    pass
-call tt_returntocannon_link_fail('tt_bryce1_canon_return_afterdrink1')
+# Linked to `Wr "There you go. Just call me if you need anything."` by the linkup scripts
+jump tt_bryce1_canon_return_afterdrink1
+
 
 label tt_bryce1_drink2_watered_down:
     Br brow "So you're serious about sticking to water tonight?"
@@ -252,10 +230,8 @@ label tt_bryce1_drink2_watered_down:
             # Br normal "Of course not. He knows to scale things by body mass."
             # Br smirk "Although..."
 
-label tt_bryce1_canon_return_contest:
-    # Linked to `Br "You know what, why don't we have ourselves a drinking contest?"` by the linkup scripts.
-    pass
-call tt_returntocannon_link_fail("tt_bryce1_canon_return_contest")
+# Linked to `Br "You know what, why don't we have ourselves a drinking contest?"` by the linkup scripts.
+jump tt_bryce1_canon_return_contest
 
 label tt_bryce1_drink2_no:
     Br stern "So you came out to a bar to not have anything? Just give it a try."
