@@ -1,6 +1,7 @@
 label tt_bryce1_minigame_variable_setup:
 default tt_bryce1_minigame.skipdialogue = True
 default tt_bryce1_minigame.talk_played = False
+default tt_bryce1_minigame.tv_played = False
 default tt_bryce1_minigame.darts_played = False
 default tt_bryce1_minigame.darts_suggested = False
 default tt_bryce1_minigame.jukebox_played = False
@@ -9,6 +10,7 @@ default tt_bryce1_minigame.jukebox_suggested = False
 python in tt_bryce1_minigame:
     skipdialogue = True
     talk_played = False
+    tv_played = False
     darts_played = False
     darts_suggested = False
     jukebox_played = False
@@ -99,6 +101,9 @@ menu:
         else:
             show bryce brow with dissolve
         jump tt_bryce1_minigame_darts
+    "[[Look for a sports TV.]" if tt_bryce1_minigame.tv_played == False:
+        $ tt_bryce1_minigame.tv_played = True
+        jump tt_bryce1_tv
     "We could chat." if tt_bryce1_minigame.talk_played == False:
         $ tt_bryce1_minigame.talk_played = True
         jump tt_bryce1_minigame_talk
