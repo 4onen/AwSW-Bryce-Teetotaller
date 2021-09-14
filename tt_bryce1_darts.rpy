@@ -94,48 +94,13 @@ init:
         if not is_debug:
             key "game_menu" action [Return(False)]
             timer 0.034 repeat True action Function(tt_bryce1_minigame_darts_store.shudder_mouse,drunkedness)
-
-label tt_bryce1_minigame_darts:
+    
     python in tt_bryce1_minigame_darts_store:
-        funplayed = 0
-        throwcount = 0
-        # Sourshot:
-        # 0: untriggered
-        # 1: Bryce landed a 3
-        # 2: Player landed next shot
-        sourshot = 0
-
-        # Realgame:
-        # 0: untriggered
-        # 1: Player throw 1
-        # 2: Player throw 2
-        # 3: Player throw 3
-        realgame = 0
-
-        player_score = 0
-        bryce_score = 0
-
-        player_misses = 0
-        player_drinks = 0
-
-        boarda_available = True
-        boarda_picked = False
-        boardb_available = True
-        boardb_picked = False
-        boardc_available = True
-        boardc_picked = False
-        # Boardup enumeration:
-        # 0: Board A
-        # 1: Board B
-        # 2: Board C
-        # None: No board is up
-        boardup = None
-        boards_fallen = 0
-        renpy.pause (0.5)
-
+        @renpy.pure
         def hit_target(x,y):
             return (x-960)**2 + (y-540)**2 < (280)**2
-        
+
+        @renpy.pure
         def get_dart_state(xy):
             x,y = xy
             if hit_target(x,y):
@@ -158,6 +123,7 @@ label tt_bryce1_minigame_darts:
                 return "",x,y
 
         T = renpy.curry(renpy.display.transform.Transform)
+        @renpy.pure
         def render_player_dart(click_xy):
             dart_state,x,y = get_dart_state(click_xy)
             if dart_state == "fall":
@@ -170,6 +136,7 @@ label tt_bryce1_minigame_darts:
                 renpy.show('tt_bryce1_playerdarthit',[T(xpos=x,ypos=y,xanchor=0.5,yanchor=1.0)])
             return dart_state,x,y
 
+        @renpy.pure
         def render_bryce_dart(click_xy):
             dart_state,x,y = get_dart_state(click_xy)
             if dart_state == "fall":
@@ -182,6 +149,7 @@ label tt_bryce1_minigame_darts:
                 renpy.show('tt_bryce1_brycedarthit',[T(xpos=x,ypos=y,xanchor=0.5,yanchor=1.0)])
             return dart_state,x,y
 
+        @renpy.pure
         def score_boarda(x,y):
             if y>abs(x/4):
                 return 2
@@ -191,7 +159,8 @@ label tt_bryce1_minigame_darts:
                 elif (-y-168)**2+x*x < 90*90:
                     return 2
             return 1
-        
+
+        @renpy.pure
         def score_boardb(x,y):
             if y*y+x*x < 60*60:
                 return 3
@@ -200,6 +169,7 @@ label tt_bryce1_minigame_darts:
             else:
                 return 1
 
+        @renpy.pure
         def score_boardc(x,y):
             if (44.8-y)**2+x*x < 40*40:
                 return 3
@@ -219,6 +189,7 @@ label tt_bryce1_minigame_darts:
         # 1  dart hit target, scored 1
         # 2  dart hit target, scored 2
         # 3  dart hit target, scored 3
+        @renpy.pure
         def render_and_score_dart(click_xy,board,renderfn):
             dart_state,x,y = renderfn(click_xy)
             if dart_state == "fall":
@@ -267,6 +238,43 @@ label tt_bryce1_minigame_darts:
                 return render_and_score_dart((950,700),boardup,render_bryce_dart)
 
 
+label tt_bryce1_minigame_darts:
+    python in tt_bryce1_minigame_darts_store:
+        funplayed = 0
+        throwcount = 0
+        # Sourshot:
+        # 0: untriggered
+        # 1: Bryce landed a 3
+        # 2: Player landed next shot
+        sourshot = 0
+
+        # Realgame:
+        # 0: untriggered
+        # 1: Player throw 1
+        # 2: Player throw 2
+        # 3: Player throw 3
+        realgame = 0
+
+        player_score = 0
+        bryce_score = 0
+
+        player_misses = 0
+        player_drinks = 0
+
+        boarda_available = True
+        boarda_picked = False
+        boardb_available = True
+        boardb_picked = False
+        boardc_available = True
+        boardc_picked = False
+        # Boardup enumeration:
+        # 0: Board A
+        # 1: Board B
+        # 2: Board C
+        # None: No board is up
+        boardup = None
+        boards_fallen = 0
+        renpy.pause (0.5)
 
     scene bg tt_bryce1_dartwall at Pan((0, 460), (0,0), 4.0) with Fade(0.5,0.0,2.0)
     $ renpy.pause(2.7)
