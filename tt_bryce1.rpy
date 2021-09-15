@@ -34,11 +34,13 @@ label tt_bryce1_variablesetup:
 default tt_bryce1_water = False
 default tt_bryce1_dontdrink = False
 default tt_bryce1_drinkincident = None
+default tt_bryce1_brycedrinks = 0
 
 python:
     tt_bryce1_water = False
     tt_bryce1_dontdrink = False
     tt_bryce1_drinkincident = None
+    tt_bryce1_brycedrinks = 0
 call tt_bryce1_minigame_variable_setup
 return
 

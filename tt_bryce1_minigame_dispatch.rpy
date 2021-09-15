@@ -143,7 +143,7 @@ label tt_bryce1_minigame_talk:
     else:
         Br smirk "Sipping at your alcohol instead of slamming a few back."
         # c "That just doesn't sound like a fun evening."
-    
+
     $ renpy.pause (0.8)
 
     Br normal "Anyways, how do you like it here so far? I mean, compared to wherever it is that you came from."
@@ -160,8 +160,9 @@ label tt_bryce1_minigame_talk:
             $ renpy.pause (0.5)
             show bryce brow with dissolve
             Br "Can't fault you for that. Home is where the heart is, after all."
-    
+
     m "While we'd talked, Bryce had finished his drink."
+    $ tt_bryce1_brycedrinks += 1
     Br laugh "Waiter, another round."
     show bryce normal with dissolve
     Wr "Coming right up."

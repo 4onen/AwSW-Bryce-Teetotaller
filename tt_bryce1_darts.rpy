@@ -729,6 +729,7 @@ label tt_bryce1_minigame_darts_realgame0:
             "[[Say nothing.]":
                 pass
         Br "Let me just finish this off."
+        $ tt_bryce1_brycedrinks += 1
         play sound "fx/gulp2.wav"
     elif tt_bryce1_minigame_darts_store.s == 0:
         Br "..."
@@ -842,6 +843,7 @@ label tt_bryce1_minigame_darts_realgame0:
         bryce_score += s if s > 0 else 0
     if tt_bryce1_minigame_darts_store.s < 0:
         hide bryce with dissolve
+        $ tt_bryce1_brycedrinks += 1
         play sound "fx/gulp3.wav"
         $ renpy.pause (6.0)
 
