@@ -731,6 +731,7 @@ label tt_bryce1_minigame_darts_realgame0:
         Br "Let me just finish this off."
         $ tt_bryce1_brycedrinks += 1
         play sound "fx/gulp2.wav"
+        $ renpy.pause (4.0)
     elif tt_bryce1_minigame_darts_store.s == 0:
         Br "..."
         menu:
