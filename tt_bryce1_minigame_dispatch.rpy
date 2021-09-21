@@ -34,11 +34,11 @@ c "I'm sure that's not the only thing we can do in here."
 label tt_bryce1_minigame_dispatch:
 
 python in tt_bryce1_minigame:
-    options_played = sum([darts_played, jukebox_played, talk_played])
+    options_played = sum([darts_played, jukebox_played, talk_played, tv_played])
 
 if tt_bryce1_minigame.options_played > 1:
     jump tt_bryce1_minigames_over
-elif sum([tt_bryce1_minigame.jukebox_suggested, tt_bryce1_minigame.darts_suggested, tt_bryce1_minigame.talk_played]) > 2:
+elif sum([tt_bryce1_minigame.jukebox_suggested, tt_bryce1_minigame.darts_suggested, tt_bryce1_minigame.talk_played, tt_bryce1_minigame.tv_played]) > 2:
     jump tt_bryce1_minigames_badend
 
 if tt_bryce1_minigame.skipdialogue == False:
