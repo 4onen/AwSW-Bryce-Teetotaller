@@ -1,9 +1,8 @@
 init python: # Magmalink required!
     def tt_bryce1_link(ml):
         ml.find_label('waitmenu') \
-            .hook_call_to('tt_bryce1_variablesetup') \
             .search_menu("Nothing yet. I'll have something later, I think.") \
-            .add_choice("Water for me.", jump='tt_bryce1_drink1_waterforme', condition='True') \
+            .add_choice("Water for me.", jump='tt_bryce1_drink1_waterforme') \
             .search_say("Noted. I'll be right back.") \
             .link_from('tt_bryce1_canon_return_noted_brb') \
             .search_say("It wasn't long before the waiter returned with a drinking bowl as wide as it was tall, filled to the brim with a foam-topped, dark amber liquid. Carefully, he set it down in front of Bryce, who didn't hesitate to take a big gulp.") \
@@ -21,28 +20,37 @@ init python: # Magmalink required!
                     .search_menu("I don't really drink, though.") \
                     .branch() \
                         .search_menu("I'll try it just for you.") \
-                        .add_choice("I don't drink", jump='tt_bryce1_drink2_pushy', condition='True') \
-                        .add_choice("No.", jump='tt_bryce1_drink2_no', condition='True') \
+                        .add_choice("I don't drink", jump='tt_bryce1_drink2_pushy') \
+                        .add_choice("No.", jump='tt_bryce1_drink2_no') \
             .search_say("You know what, why don't we have ourselves a drinking contest?") \
             .link_from('tt_bryce1_canon_return_contest') \
             .search_menu("I would, but I don't think I can beat someone like you.") \
-            .add_choice("No. Light drinking, please.", jump='tt_bryce1_drink2_light', condition='True')
+            .add_choice("No. Light drinking, please.", jump='tt_bryce1_drink2_light') \
+            .search_menu("Heck, no.") \
+            .search_menu("That's not a blush!") \
+            .search_menu("I'm having a drinking contest with a dragon. How could I not love this?") \
+            .search_menu("That's my tactic, make you think that I'm struggling so you'll let your guard down.") \
+            .search_menu("Maybe. Having a lil' fun doesn't hurt, right?") \
+            .search_menu("Y-You never said that was a rule.") \
+            .search_menu("Why are you so damn attractive?") \
+            .search_menu("I think... it's yours.") \
+            .search_menu("If you think I'm giving up, you're mistaken. This isn't over.") \
+            .search_menu("I know when I've had enough, and it's now.") \
+            .search_menu("[[Leave.]") \
+            .search_menu("Put some pepper on his nose.") \
+            .branch() \
+                .search_say("(Huh... that was actually the salt, not the pepper. Let's try that again.)")
+                .link_behind_from('tt_bryce1_pepperwake_canon')
+                .search_say("That's the best you could come up with?")
+                .hook_to('tt_bryce1_pepperwake',condition='tt_bryce1_minigame.wake_pepper')
     tt_bryce1_link(magmalink())
 
-label tt_bryce1_variablesetup:
 
-default tt_bryce1_water = False
-default tt_bryce1_dontdrink = False
-default tt_bryce1_drinkincident = None
-default tt_bryce1_brycedrinks = 0
-
-python:
+init python:
     tt_bryce1_water = False
     tt_bryce1_dontdrink = False
     tt_bryce1_drinkincident = None
     tt_bryce1_brycedrinks = 0
-call tt_bryce1_minigame_variable_setup
-return
 
 label tt_bryce1_chapterover_teetotaller:
     if persistent.c1teetotaler == False and not beer:
