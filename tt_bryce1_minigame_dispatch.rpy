@@ -230,7 +230,7 @@ label tt_bryce1_minigame_drinking:
                 python:
                     brycemood += 1
                     renpy.pause(0.5)
-                play sound "fx/tableslap.ogg"
+                play sound "fx/tableslap.wav"
                 Br laugh "I knew it!"
                 Br smirk "It's not going to work, though. I won't lose to someone calling themselves a lightweight."
             else:
@@ -260,7 +260,7 @@ label tt_bryce1_minigame_drinking:
         "That won't stop me.":
             c "I see your skipped round and raise you: I'll still win anyway."
             $ brycemood += 1
-            play sound "fx/tableslap.ogg"
+            play sound "fx/tableslap.wav"
             Br laugh "Confident, huh?"
             Br smirk "We'll see how long that lasts."
     scene black with dissolve
