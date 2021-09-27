@@ -2,6 +2,7 @@ init python in tt_bryce1_minigame:
     skipdialogue = True
     talk_played = False
     tv_played = False
+    tv_suggested = False
     darts_played = False
     darts_suggested = False
 
@@ -28,9 +29,9 @@ label tt_bryce1_minigame_dispatch:
 python in tt_bryce1_minigame:
     options_played = sum([darts_played, talk_played, tv_played])
 
-if tt_bryce1_minigame.options_played > 2:
+if tt_bryce1_minigame.options_played > 1:
     jump tt_bryce1_minigames_over
-elif sum([tt_bryce1_minigame.darts_suggested, tt_bryce1_minigame.talk_played, tt_bryce1_minigame.tv_played]) > 1:
+elif sum([tt_bryce1_minigame.darts_suggested, tt_bryce1_minigame.talk_played, tt_bryce1_minigame.tv_suggested]) > 2:
     jump tt_bryce1_minigames_badend
 
 if tt_bryce1_minigame.skipdialogue == False:
@@ -69,7 +70,40 @@ menu:
         else:
             show bryce brow with dissolve
         jump tt_bryce1_minigame_darts
-    "[[Look for a sports TV.]" if tt_bryce1_minigame.tv_played == False:
+    "[[Look for a sports TV.]" if tt_bryce1_minigame.tv_suggested == False:
+        $ tt_bryce1_minigame.tv_suggested = True
+        m "You take a look around the bar, but don't spot any TVs."
+        Br brow "What are you looking for?"
+        c "Where I'm from, most bars have a TV or two tuned to a sports channel."
+        Br "Sports?"
+        c "Yeah. You know, stadiums? Usually a bunch of people chasing after a ball."
+        if brycemood > -1:
+            show bryce laugh with dissolve
+        else:
+            show bryce stern with dissolve
+        Br "I know what you're talking about, except for the stadium thing."
+        if brycemood > -1:
+            show bryce normal with dissolve
+        else:
+            show bryce brow with dissolve
+        Br "But why would anyone come to a bar to watch sports?"
+        c "Cheering on your favorite team?"
+        Br brow "Favorite team?"
+        c "We had hundreds of teams, across dozens of sports, and that was just counting the professional leagues. I think the academic leagues had thousands of sports teams."
+        c "Most people would just support the teams in their areas. Some people grow attached to their teams and keep supporting them, even if they move or the team moves."
+        if brycemood < 0:
+            Br stern "Great. So humans take one of the most boring topics and make it complicated."
+            c "I'm not sure I understand. Sports are fun, right? They were a major conversation topic in our world."
+            c "If you didn't have anything to talk about with someone, you could talk sports."
+            show bryce brow with dissolve
+            $ renpy.pause (1.5)
+            c "I take it that's not going to work here."
+            Br stern "Not really. Most don't pay attention to sports. It gets a tiny budget out of arts and culture."
+            Br "But you could ask someone at a library about that. Let's move on."
+            jump tt_bryce1_minigame_dispatch
+        else:
+            Br normal "Sounds complicated."
+            Br normal "But if that's what humans do out at a bar."
         $ tt_bryce1_minigame.tv_played = True
         jump tt_bryce1_tv
     "We could chat." if tt_bryce1_minigame.talk_played == False:

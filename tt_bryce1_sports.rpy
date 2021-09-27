@@ -61,17 +61,6 @@ label tt_bryce1_tv:
         sporttalk_quidditch = False
         sporttalk_stuntflying = False
 
-    m "You take a look around the bar, but don't spot any TVs."
-    Br brow "What are you looking for?"
-    c "Where I'm from, most bars have a TV or two tuned to a sports channel."
-    Br "Sports?"
-    c "Yeah. You know, stadiums? Usually a bunch of people chasing after a ball."
-    Br laugh "I know what you're talking about, except for the stadium thing."
-    Br normal "But why would anyone come to a bar to watch sports?"
-    c "Cheering on your favorite team?"
-    Br brow "Favorite team?"
-    c "We had hundreds of teams, across dozens of sports, and that was just counting the professional leagues. I think the academic leagues had thousands of sports teams."
-    c "Most people would just support the teams in their areas. Some people grow attached to their teams and keep supporting them, even if they move or the team moves."
     Br normal "Sounds complicated."
     Br normal "But if that's what humans do out at a bar."
     Br laugh "Hey, waiter?"
