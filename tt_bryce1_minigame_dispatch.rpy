@@ -4,8 +4,6 @@ init python in tt_bryce1_minigame:
     tv_played = False
     darts_played = False
     darts_suggested = False
-    jukebox_played = False
-    jukebox_suggested = False
 
     wake_salt = False
     wake_pepper = False
@@ -28,11 +26,11 @@ c "I'm sure that's not the only thing we can do in here."
 label tt_bryce1_minigame_dispatch:
 
 python in tt_bryce1_minigame:
-    options_played = sum([darts_played, jukebox_played, talk_played, tv_played])
+    options_played = sum([darts_played, talk_played, tv_played])
 
 if tt_bryce1_minigame.options_played > 2:
     jump tt_bryce1_minigames_over
-elif sum([tt_bryce1_minigame.jukebox_suggested, tt_bryce1_minigame.darts_suggested, tt_bryce1_minigame.talk_played, tt_bryce1_minigame.tv_played]) > 3:
+elif sum([tt_bryce1_minigame.darts_suggested, tt_bryce1_minigame.talk_played, tt_bryce1_minigame.tv_played]) > 1:
     jump tt_bryce1_minigames_badend
 
 if tt_bryce1_minigame.skipdialogue == False:
@@ -45,30 +43,6 @@ if tt_bryce1_minigame.skipdialogue == False:
 $ tt_bryce1_minigame.skipdialogue = False
 
 menu:
-    "[[Ask about the jukebox in the corner.]" if tt_bryce1_minigame.jukebox_suggested == False:
-        c "Hey, waiter?"
-        show waiter flip at Position(xpos=0.1) with easeinleft
-        Wr "Yes?"
-        c "That's a jukebox over there, right?"
-        Wr "Yes. It is a jukebox."
-        c "That's something."
-        $ tt_bryce1_minigame.jukebox_suggested = True
-        Br brow "Dancing? You expect me to be able to dance?"
-        c "We could also just listen."
-        show waiter with dissolve
-        $ renpy.pause (0.3)
-        hide waiter with easeoutleft
-
-        if brycemood < -2:
-            Br stern "No. I can tell you're going to try to trick me into dancing. I do not need that staining my reputation."
-            c "But--"
-            Br "No buts. I'm calling veto. Choose something else to do."
-            $ tt_bryce1_minigame.skipdialogue = True
-            jump tt_bryce1_minigame_dispatch
-        # This line written by GitHub Copilot
-        Br "I'm not sure what you're trying to do, but I'm not sure I like it."
-        $ tt_bryce1_minigame.jukebox_played = True
-        jump tt_bryce1_minigame_jukebox
     "[[Inquire about the pin on the wall behind you.]" if tt_bryce1_minigame.darts_suggested == False:
         c "Hey, waiter?"
         show waiter flip at Position(xpos=0.1) with easeinleft
