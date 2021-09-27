@@ -39,9 +39,9 @@ init python: # Magmalink required!
             .search_menu("[[Leave.]") \
             .search_menu("Put some pepper on his nose.") \
             .branch() \
-                .search_say("(Huh... that was actually the salt, not the pepper. Let's try that again.)")
-                .link_behind_from('tt_bryce1_pepperwake_canon')
-                .search_say("That's the best you could come up with?")
+                .search_say("(Huh... that was actually the salt, not the pepper. Let's try that again.)") \
+                .link_behind_from('tt_bryce1_pepperwake_canon') \
+                .search_say("That's the best you could come up with?") \
                 .hook_to('tt_bryce1_pepperwake',condition='tt_bryce1_minigame.wake_pepper')
     tt_bryce1_link(magmalink())
 
