@@ -227,7 +227,7 @@ label tt_bryce1_tv:
             # Br normal flip "It's a game where you throw a ball into the air, and it's up to you to catch it." # Cute, but no.
             Br normal flip "You take a tree trunk, all debranched and stuff, usually straight up and down."
             Br smirk flip "And throw it, end over end."
-            Br normal "Score is based on distance, number of times it flips over, how straight you throw it, and whether you make sure it falls away from you when it finally hits the ground -- toward you is less points."
+            Br normal flip "Score is based on distance, number of times it flips over, how straight you throw it, and whether you make sure it falls away from you when it finally hits the ground -- toward you is less points."
             Br stern flip "It's definitely cool to watch, but in my opinion the health risks outweigh the cool factor."
             c "The health risks of... throwing an entire tree?"
             menu:
