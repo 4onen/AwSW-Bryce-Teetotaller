@@ -104,7 +104,7 @@ menu:
     "Well, we could still have that drinking contest..." if beer:
         jump tt_bryce1_minigame_drinking
 
-    $ renpy.error("tt_bryce1_minigame_dispatch menu should always jump somewhere, but didn't!")
+$ renpy.error("tt_bryce1_minigame_dispatch menu should always jump somewhere, but didn't!")
 
 
 
@@ -375,9 +375,9 @@ label tt_bryce1_minigames_over:
         m "Bryce is still unconscious."
         label tt_bryce1_wakemenu:
         menu:
-            m "Bryce is still unconscious."
-            "Put some salt on his nose." if wake_salt:
-                $ tt_bryce1_minigame.wake_salt = False
+            m "Bryce is still unconscious.{fast}"
+            "Put some salt on his nose." if not wake_salt:
+                $ tt_bryce1_minigame.wake_salt = True
                 c "(Right. It'll be like smelling salts.)"
                 play sound "fx/salt.ogg"
                 $ renpy.pause (1.5)
@@ -448,6 +448,7 @@ label tt_bryce1_minigames_over:
     else:
         n "The walk home was uneventful and peaceful, just the crunch of gravel between us."
     n "Before long, we arrived at my apartment door and Bryce bid me a good night."
+    n "I fell into my bed for a calm night's rest..."
     window hide
     nvl clear
     $ brycestatus = "neutral"
