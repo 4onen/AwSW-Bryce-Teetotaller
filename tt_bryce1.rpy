@@ -31,6 +31,7 @@ init python: # Magmalink required!
             .search_menu("I'm having a drinking contest with a dragon. How could I not love this?") \
             .search_menu("That's my tactic, make you think that I'm struggling so you'll let your guard down.") \
             .search_menu("Maybe. Having a lil' fun doesn't hurt, right?") \
+            .link_behind_from('tt_bryce1_canon_return_midcontest') \
             .search_menu("Y-You never said that was a rule.") \
             .search_menu("Why are you so damn attractive?") \
             .search_menu("I think... it's yours.") \

@@ -230,6 +230,7 @@ label tt_bryce1_minigame_drinking:
                 python:
                     brycemood += 1
                     renpy.pause(0.5)
+                play sound "fx/tableslap.ogg"
                 Br laugh "I knew it!"
                 Br smirk "It's not going to work, though. I won't lose to someone calling themselves a lightweight."
             else:
@@ -239,7 +240,32 @@ label tt_bryce1_minigame_drinking:
             c "Though, I guess it could be construed as advantageous."
             Br smirk "Planned or not, it won't work. I won't lose to someone calling themselves a lightweight."
     
-    $ renpy.error("TODO: Transition the drinking game back into canon whenever possible.")
+    Br brow "Let me think. You've had... one glass tonight? Two?"
+    c "Somewhere in there."
+    Br smirk "Either way, it's definitely your turn right now."
+
+    play sound "fx/gulp2.wav"
+    m "I lifted my glass and started drinking. It was one thing to agree to the contest, but actually starting made me realize how much alcohol was already in my system."
+    play sound "fx/glassdown.wav"
+    c "There. Your... turn."
+    Br normal "Nah. I finished my last a little while ago, and we have to wait for each glass to actually start affecting us."
+    Br smirk "Besides, have to trim your advantage back to fair play somehow!"
+    show bryce normal with dissolve
+    menu:
+        "That's not fair!":
+            $ brycemood -= 1
+            Br stern "Says the one who tried to get me going before we started."
+        "Fair enough.":
+            pass
+        "That won't stop me.":
+            c "I see your skipped round and raise you: I'll still win anyway."
+            $ brycemood += 1
+            play sound "fx/tableslap.ogg"
+            Br laugh "Confident, huh?"
+            Br smirk "We'll see how long that lasts."
+    scene black with dissolve
+    $ double_vision_on("bareblur")
+    jump tt_bryce1_canon_return_midcontest
 
 label tt_bryce1_minigames_badend:
     if beer:
