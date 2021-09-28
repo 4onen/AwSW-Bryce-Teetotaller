@@ -339,7 +339,7 @@ label tt_bryce1_minigames_over:
                                 Br brow "Oh. Nevermind."
                         Br "You might be right, though. Normally I go a little heavier than this and I'm not even sure how I get home."
                         c "Well, you're gonna have to lead the way."
-                        Br normal "Sure."
+                        Br normal "Right."
                         jump tt_bryce1_apartment
                 "Can you even find my home right now?":
                     $ brycemood -= 2
