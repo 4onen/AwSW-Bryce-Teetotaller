@@ -675,7 +675,15 @@ label tt_bryce1_minigame_darts_realgame0:
         play music "mx/archaic.ogg" fadein 1.0
         Br "Alright. Want to try that throw again?"
 
-    # TODO: Add a "round" image slider.
+
+
+    $ renpy.pause (0.5)
+    play sound "fx/woosh3.ogg"
+    show round1 at Pan ((-500, -200), (0, -200), 1.0) with wiperight
+    $ renpy.pause (2.0)
+    hide round1 with wiperight
+
+
 
     hide bryce with dissolve
     python in tt_bryce1_minigame_darts_store:
@@ -756,6 +764,8 @@ label tt_bryce1_minigame_darts_realgame0:
             "[[Say nothing.]":
                 pass
 
+    Br "Well, your throw."
+    hide bryce with dissolve
 
     ### THROW TWO ###
 
@@ -773,8 +783,15 @@ label tt_bryce1_minigame_darts_realgame0:
     hide tt_bryce1_brycedarthit
     with dissolve
 
-    # TODO: Add a "round" image slider.
-    
+
+    $ renpy.pause (0.5)
+    play sound "fx/woosh3.ogg"
+    show round2 at Pan ((-500, -200), (0, -200), 1.0) with wiperight
+    $ renpy.pause (2.0)
+    hide round2 with wiperight
+
+
+
     python in tt_bryce1_minigame_darts_store:
         realgame = 2
         s = player_throw()
@@ -815,11 +832,27 @@ label tt_bryce1_minigame_darts_realgame0:
                         Br laugh flip "Waiter, [player_name] is going to need another!"
                         show bryce normal flip with dissolve
         else:
-            show bryce brow flip at left with dissolve
-            Br "You're kidding, right?"
-            c "Maybe it's a good thing I'm not drinking, then. Aim that bad on alcohol, I could have hit another patron."
-            Br laugh flip "Fair enough."
-            show bryce normal flip with dissolve
+            if tt_bryce1_minigame_darts_store.s < 0:
+                show bryce brow flip at left with dissolve
+                Br "You're kidding, right?"
+                c "Maybe it's a good thing I'm not drinking, then. Aim that bad on alcohol, I could have hit another patron."
+                Br laugh flip "Fair enough."
+                show bryce normal flip with dissolve
+            else: # tt_bryce1_minigame_darts_store.s == 0:
+                show bryce brow flip at left with dissolve
+                if tt_bryce1_minigame_darts_store.bryce_score > 1:
+                    Br "Hm. Miss. That's going to be tough to make up."
+                else:
+                    Br stern flip "You don't have to miss to keep our scores even."
+                    menu:
+                        "I was {i}so{/i} close.":
+                            $ brycemood += 1
+                            Br smirk flip "If you say so."
+                        "That wasn't on purpose.":
+                            Br normal flip "If you say so."
+                        "Sorry."
+                            $ brycemood -= 2
+                            Br stern flip "Just don't. No pity shots."
     elif tt_bryce1_minigame_darts_store.s <= 2:
         pass
     elif tt_bryce1_minigame_darts_store.s == 3:
@@ -954,12 +987,21 @@ label tt_bryce1_minigame_darts_realgame0:
 
     ### THROW THREE ###
 
-    if False: # TODO: Alcohol drink.
-        show bryce smirk flip at left with dissolve
-        c "Okay, just give me a second."
-        play sound "fx/gulp3.wav"
-        $ renpy.pause(6.0)
-        $ tt_bryce1_minigame_darts_store.player_drinks += 1
+    $ renpy.pause (0.5)
+    play sound "fx/woosh3.ogg"
+    show round3 at Pan ((-500, -200), (0, -200), 1.0) with wiperight
+    $ renpy.pause (2.0)
+    hide round3 with wiperight
+
+    play sound "fx/system3.wav"
+    s "OUT OF CONTENT."
+
+    # if False: # TODO: Alcohol drink.
+    #     show bryce smirk flip at left with dissolve
+    #     c "Okay, just give me a second."
+    #     play sound "fx/gulp3.wav"
+    #     $ renpy.pause(6.0)
+    #     $ tt_bryce1_minigame_darts_store.player_drinks += 1
 
 
     $ renpy.error("Rest of the game.")
