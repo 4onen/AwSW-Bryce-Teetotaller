@@ -996,15 +996,7 @@ label tt_bryce1_minigame_darts_realgame0:
     play sound "fx/system3.wav"
     s "OUT OF CONTENT."
 
-    # if False: # TODO: Alcohol drink.
-    #     show bryce smirk flip at left with dissolve
-    #     c "Okay, just give me a second."
-    #     play sound "fx/gulp3.wav"
-    #     $ renpy.pause(6.0)
-    #     $ tt_bryce1_minigame_darts_store.player_drinks += 1
-
-
-    $ renpy.error("Rest of the game.")
+    $ renpy.error("TODO: Rest of the game.")
 
 label tt_bryce1_minigame_darts_pointpicker:
     scene bg tt_bryce1_dartwall hanger at top
