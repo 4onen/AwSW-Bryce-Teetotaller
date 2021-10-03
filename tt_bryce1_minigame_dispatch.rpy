@@ -327,7 +327,8 @@ label tt_bryce1_minigames_over:
             menu:
                 "Are you sure?":
                     c "Kinda seems like you might need more help getting home."
-                    if brycemood > 1:
+                    if brycemood > 0:
+                        $ brycemood += 1
                         Br flirty "Is that you asking to come over to my place?"
                         menu:
                             "Uh.":
@@ -344,6 +345,8 @@ label tt_bryce1_minigames_over:
                         c "Well, you're gonna have to lead the way."
                         Br normal "Right."
                         jump tt_bryce1_apartment
+                    else:
+                        Br stern "I'll figure something out."
                 "Can you even find my home right now?":
                     $ brycemood -= 2
                     Br stern "Ha. Very funny."
