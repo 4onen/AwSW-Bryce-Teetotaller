@@ -314,7 +314,10 @@ label tt_bryce1_minigames_over:
         else: # brycemood <= 0:
             Br brow "Guess that's the end of one dull evening."
             c "Hey, I was trying."
-            Br stern "Not very well."
+            if brycemood <= -2:
+                Br stern "Not very well."
+            else:
+                Br "Uh-huh"
 
         if tt_bryce1_brycedrinks >= 2:
             play sound "fx/chair.ogg"
