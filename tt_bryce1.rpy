@@ -381,7 +381,7 @@ label tt_bryce1_drink2_dontdrink:
             if brycemood < 0:
                 c "Well, I'm not exactly looking for an evening I can't remember."
             else:
-                m "I shrug, avoiding the irreconcileable difference of opinion."
+                m "I shrugged, avoiding the topic of the difference of opinion."
         "I'd like to avoid it.":
             $ nodrinks = True
             $ brycemood -= 1
