@@ -207,7 +207,7 @@ label tt_bryce1_apartment_morning:
         $ renpy.pause(2.0)
         hide cgbryce with dissolve
         hide black
-        show bryce laugh at Position(xpos=0.45,xanchor='center'):
+        show bryce laugh at Position(xpos=0.45,xanchor='center',ypos=1.0,yanchor='bottom'):
             ypos 1.2
         with dissolvemed
         m "Apparently Bryce had moved from the door, when it was clear I wasn't going anywhere."
