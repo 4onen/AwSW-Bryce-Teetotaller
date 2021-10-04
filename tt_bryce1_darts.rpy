@@ -226,7 +226,7 @@ init:
             1: [(925, 676), (970, 639), (1058, 569), (979, 770), (953, 612), (984, 746), (996, 806), (1006, 284), (951, 697), (941, 705), (923, 696), (982, 681), (997, 478), (968, 786), (960, 705), (954, 598), (947, 656), (878, 613), (894, 616), (921, 748)],
             2: [(903, 526), (960, 545), (1058, 582), (689, 590), (889, 577), (1019, 593), (1123, 544), (880, 509), (908, 620), (752, 536), (989, 524), (1006, 556), (1182, 546), (1148, 507), (946, 621), (1171, 538), (973, 538), (997, 561), (1143, 623), (1048, 489)]
         }
-        def bryce_throw(goal_score=None):
+        def bryce_throw(goal_score=None, cheat=False):
             # Goal_score 1 is illegal. Bryce doesn't go for 1s.
             renpy.show('bryce back flip',at_list=[renpy.python.store_dicts['store']['left']])
             renpy.with_statement(renpy.python.store_dicts['store']['dissolve'])
@@ -299,9 +299,7 @@ label tt_bryce1_minigame_darts:
                         Br stern "If you say so. In that case, I'd prefer to move to something else."
                         c "Alright."
                         $ renpy.pause (0.8)
-                        scene bare with fade
-                        show bryce normal at center with dissolve
-                        jump tt_bryce1_minigame_dispatch
+                        jump tt_bryce1_minigame_darts_packup
                     "I guess I can play for real.":
                         $ renpy.pause (0.3)
             "Sure. Let's play for real.":
@@ -618,8 +616,7 @@ label tt_bryce1_minigame_darts_boardfall:
         $ renpy.pause (0.3)
         hide bryce with easeoutright
         $ renpy.pause (0.5)
-        scene bare with Fade(0.5, 0.0, 1.0)
-        jump tt_bryce1_minigame_dispatch
+        jump tt_bryce1_minigame_darts_packup
 
 
 label tt_bryce1_minigame_darts_competitive_boardselect:
@@ -850,7 +847,7 @@ label tt_bryce1_minigame_darts_realgame0:
                             Br smirk flip "If you say so."
                         "That wasn't on purpose.":
                             Br normal flip "If you say so."
-                        "Sorry."
+                        "Sorry.":
                             $ brycemood -= 2
                             Br stern flip "Just don't. No pity shots."
     elif tt_bryce1_minigame_darts_store.s <= 2:
@@ -892,11 +889,11 @@ label tt_bryce1_minigame_darts_realgame0:
             Br brow flip "There's nothing to give up. I can't win."
             c "Oh. Huh. Guess I do win, then."
             Br stern flip "Maybe this was a bad idea to begin with."
+            label tt_bryce1_minigame_darts_brycegiveup:
             Br "I'll pack up. You head back to the table."
             hide bryce with dissolve
             $ renpy.pause(0.5)
-            scene bare with fade
-            jump tt_bryce1_minigame_dispatch
+            jump tt_bryce1_minigame_darts_packup
         else:
             if brycemood > 0:
                 show bryce laugh flip at left with dissolve
@@ -910,7 +907,7 @@ label tt_bryce1_minigame_darts_realgame0:
                     $ brycemood -= 1
                     Br stern "Considering the alcohol, or the lack of hands?"
                     Br "Forget it. Let's just play the last throw."
-                "On way more alcohol than me, too.":
+                "On way more alcohol than me, though.":
                     $ brycemood += 1
                     Br laugh flip "Very true!"
                     Br normal flip "So. Last throw."
@@ -963,8 +960,7 @@ label tt_bryce1_minigame_darts_realgame0:
             Br "I'll pack up. You head back to the table."
             hide bryce with dissolve
             $ renpy.pause(0.5)
-            scene bare with fade
-            jump tt_bryce1_minigame_dispatch
+            jump tt_bryce1_minigame_darts_packup
         else:
             $ brycemood += 1
             show bryce laugh flip at left with dissolve
@@ -987,16 +983,138 @@ label tt_bryce1_minigame_darts_realgame0:
 
     ### THROW THREE ###
 
+    hide tt_bryce1_playerdarthit
+    hide tt_bryce1_brycedarthit
+    with dissolve
+
     $ renpy.pause (0.5)
     play sound "fx/woosh3.ogg"
     show round3 at Pan ((-500, -200), (0, -200), 1.0) with wiperight
     $ renpy.pause (2.0)
     hide round3 with wiperight
+    hide bryce with dissolve
 
-    play sound "fx/system3.wav"
-    s "OUT OF CONTENT."
+    python in tt_bryce1_minigame_darts_store:
+        realgame = 3
+        s = player_throw()
+        renpy.pause(0.5)
+        player_score += s if s > 0 else 0
+    if tt_bryce1_minigame_darts_store.s == -3:
+        jump tt_bryce1_minigame_darts_boardfall
+    elif tt_bryce1_minigame_darts_store.s < 1:
+        show bryce stern flip at left with dissolve
+        if tt_bryce1_minigame_darts_store.s < 0:
+            Br "You missed the board entirely. On the last throw."
+        else:
+            Br "You missed any scoring zone. On the last throw."
+        $ brycemood -= 1
+        if tt_bryce1_minigame_darts_store.player_drinks > 0:
+            play sound "fx/gulp2.wav"
+            $ brycemood += 1
+            Br normal flip "Fair enough."
+        elif beer and tt_bryce1_minigame_darts_store.player_misses < 1:
+            menu:
+                "I'm not turning this into a drinking game.":
+                    $ brycemood -= 3
+                    Br stern "Have it your way."
+                "[[Take your drink.]":
+                    play sound "fx/gulp2.wav"
+                    Br brow flip "Drinking now doesn't exactly help explain how you missed then."
+                    menu:
+                        "Misses happen.":
+                            c "What are the scores?"
+                        "I messed up to make you feel better.":
+                            $ brycemood -= 2
+                            Br stern "I'm pretty sure I asked you not to take any pity shots."
+                            c "Well, too bad."
+                            Br "If you were planning this from the start, this whole thing was a stupid idea."
+                            c "Hey, I was trying to make this night better for you."
+                            Br brow "And you thought winning unfairly at darts would provide that for me?"
+                            jump tt_bryce1_minigame_darts_brycegiveup
+        elif beer:
+            $ brycemood -= 1
+        else:
+            if tt_bryce1_minigame_darts_store.s < 0:
+                Br "You have hands. How could you fail at this?"
+                c "Maybe it's not as easy as it looks?"
+                Br brow flip "With {i}fingers{/i}?"
+                c "Look, stop freaking out about it and check our scores."
+                Br "..."
+            else:
+                Br "You have hands. How could you miss this?"
+                c "I was trying! Look how close I got it."
+                show bryce back flip with dissolve
+                m "Bryce inspected the board for a long moment, then pawed his head as he considered the scores."
 
-    $ renpy.error("TODO: Rest of the game.")
+
+
+
+
+    if tt_bryce1_minigame_darts_store.player_score - tt_bryce1_minigame_darts_store.bryce_score > 3:
+        show bryce stern flip at left with dissolve
+        Br "And that's the game."
+        c "I mean, we don't have to skip your last turn. Let's at least see how close you got, right?"
+        Br back flip "..."
+        python in tt_bryce1_minigame_darts_store:
+            renpy.pause(0.5)
+            s = bryce_throw(2,True)
+            renpy.pause(0.5)
+            bryce_score += s if s > 0 else 0
+        c "You just aimed for a two again?"
+        Br brow flip "I told you that's the best I can usually do."
+        c "Fair. Still, one more throw and I think you could tie me up."
+        Br stern flip "Not how the game works, unfortunately. Still..."
+    elif tt_bryce1_minigame_darts_store.player_score - tt_bryce1_minigame_darts_store.bryce_score >= 2:
+        show bryce stern flip at left with dissolve
+        if tt_bryce1_minigame_darts_store.player_score - tt_bryce1_minigame_darts_store.bryce_score == 3:
+            Br "Damn this. There's no way I make that shot to tie."
+        else: # == 2
+            Br "Damn this. There's no way I make that shot to win. Not even sure I can tie."
+        c "You miss 100%% of the shots you don't take."
+        Br back flip "..."
+        m "Bryce stared down the board for a long, long moment, then threw."
+        python in tt_bryce1_minigame_darts_store:
+            renpy.pause(1.5)
+            s = bryce_throw(player_score - bryce_score,True)
+            renpy.pause(0.5)
+            bryce_score += s if s > 0 else 0
+        $ brycemood += 3
+        Br laugh flip "I made it!"
+        c "You made it!"
+        Br flirty flip "Holy heck. That was close. And yet I tied up you and your hands."
+        c "Yeah, that was awesome."
+        show bryce smirk flip with dissolve
+        c "Wait, what?"
+    else: # tt_bryce1_minigame_darts_store.player_score - tt_bryce1_minigame_darts_store.bryce_score < 2:
+        if tt_bryce1_minigame_darts_store.player_score - tt_bryce1_minigame_darts_store.bryce_score < 1:
+            Br brow flip "I score even a one, I'm going to win."
+        else:
+            Br stern flip "Gotta make a two."
+        c "All up to you."
+        Br back flip "..."
+        m "Bryce stared down the board for a long, long moment, then threw."
+        python in tt_bryce1_minigame_darts_store:
+            renpy.pause(1.5)
+            s = bryce_throw(2,True)
+            renpy.pause(0.5)
+            bryce_score += s if s > 0 else 0
+        $ brycemood += 1
+        c "You hit it!"
+        Br normal flip "I did."
+        Br brow flip "Not as satisfying as I thought it would be."
+        c "Well, enjoy it. Next time I'll practice more."
+        Br normal flip "Maybe I will too."
+    Br normal flip "This was pretty fun. Let me pack up and I'll see you back at the table."
+    c "Sure."
+    hide bryce with dissolve
+    jump tt_bryce1_minigame_darts_packup
+
+label tt_bryce1_minigame_darts_packup:
+    if tt_bryce1_minigame_darts_store.realgame > 0:
+        play music "mx/clouds.ogg" fadein 1.0
+    $ renpy.pause(0.5)
+    scene bare with fade
+    jump tt_bryce1_minigame_dispatch
 
 label tt_bryce1_minigame_darts_pointpicker:
     scene bg tt_bryce1_dartwall hanger at top

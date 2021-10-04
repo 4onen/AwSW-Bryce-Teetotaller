@@ -481,6 +481,7 @@ label tt_bryce1_minigames_over:
         jump tt_bryce1_apartment
 
     scene black with fade
+    stop music fadeout 1.0
     nvl clear
     window show
     if beer or tt_bryce1_brycedrinks >= 2:
