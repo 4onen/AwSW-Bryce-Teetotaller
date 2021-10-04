@@ -61,8 +61,6 @@ label tt_bryce1_tv:
         sporttalk_quidditch = False
         sporttalk_stuntflying = False
 
-    Br normal "Sounds complicated."
-    Br normal "But if that's what humans do out at a bar."
     Br laugh "Hey, waiter?"
     show bryce normal with dissolve
     show waiter flip at Position(xpos=0.1) with easeinleft
