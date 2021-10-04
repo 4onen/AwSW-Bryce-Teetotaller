@@ -130,7 +130,7 @@ label tt_bryce1_tv:
     $ renpy.pause (1.0)
     Br stern flip "Uh oh."
     c "What's wrong?"
-    Br brow flip "The goalie on the left. That's a flier."
+    Br brow flip "The goalie on the left. That's a flyer."
     c "And?"
     Br stern flip "That's a dangerous position for anyone with wings to play. People kick and whip the ball at the highest speeds when shooting for the goal."
     Br "Wing injuries from that aren't pretty. And she's nothing but wings."
@@ -139,7 +139,7 @@ label tt_bryce1_tv:
     show bryce stern flip with dissolve
     menu:
         "Who says they didn't?":
-            c "Maybe that flier just really feels strongly for achieving in that sport, and is willing to take the risk. Many humans feel the same way in similarly dangerous sports. Rock climbing, skydiving..."
+            c "Maybe that flyer just really feels strongly for achieving in that sport, and is willing to take the risk. Many humans feel the same way in similarly dangerous sports. Rock climbing, skydiving..."
             $ brycemood -= 1
             Br brow flip "She's putting herself in harm's way for no reason."
             Br "Consider what happens if she is hurt. Then she has to be treated at their local healthcare facilities."
@@ -240,14 +240,14 @@ label tt_bryce1_tv:
             Br normal flip "Well, it's a pretty expensive piece of tech. But the relevant part here is the tech inside it that makes it float."
             c "What, just hover in the air?"
             Br brow flip "And fly around under its own power. I haven't seen one operating, but that's about it."
-            Br normal flip "Anyway. In Quidditch, they've got a few balls with that tech inside, so it's really a flier sport."
+            Br normal flip "Anyway. In Quidditch, they've got a few balls with that tech inside, so it's really a flyer sport."
             Br stern flip "It's also a really expensive sport, so only very rarely done."
-            c "I see. So I'm guessing it's only for fliers."
+            c "I see. So I'm guessing it's only for flyers."
             Br normal flip "Yeah. Not that they'd exclude someone else, but it's not exactly possible for someone stuck on the ground to deal with hoops way up in the air."
             Br "Oh, yeah, hoops, balls..."
             $ renpy.pause (0.8)
             Br stern flip "Okay. So I'm pretty fuzzy on any of the rules or terms."
-            Br brow flip "But it's annoying because there's one ball that if a flier catches it, it's basically guaranteed the game ends in that team's favor."
+            Br brow flip "But it's annoying because there's one ball that if a flyer catches it, it's basically guaranteed the game ends in that team's favor."
             c "Yeah, that's exactly how our version goes."
             Br "So you have some way to fly?"
             c "Well, no. This sport was described in our fiction. There are approximations to play on the ground, but they're not even close to the flying version."
@@ -264,10 +264,10 @@ label tt_bryce1_tv:
             $ tt_bryce1_minigame.sporttalk_stuntflying = True
             Br normal flip "Now for one I've seen in person."
             c "So, what is it? Are there specific stunts that they need to perform, like an obstacle course?"
-            Br brow flip "No. That would be too dangerous for the fliers, and somewhat unfair. It'd force different fliers with different body shapes through one activity."
+            Br brow flip "No. That would be too dangerous for the flyers, and somewhat unfair. It'd force different flyers with different body shapes through one activity."
             Br stern flip "If people failed, they could get hurt. If everyone succeeds, it's boring -- they're all almost the same."
             c "I see. So it's more freeform?"
-            Br normal flip "Pretty much. Every contestant knows their limits, so they do the most extravagant tricks they can perform. Tricks that one flier can perform, another can't. So there's really an aspect of competition in showing off to the judges."
+            Br normal flip "Pretty much. Every contestant knows their limits, so they do the most extravagant tricks they can perform. Tricks that one flyer can perform, another can't. So there's really an aspect of competition in showing off to the judges."
             c "Showing off to judges. Okay, so a bit like our gymnastics competitions. They're doing the most impressive things they can to impress, to earn a high score."
             Br "Sounds similar, yeah."
         "I think that sates my curiosity." if tt_bryce1_minigame.sporttalk_count > 0 and tt_bryce1_minigame.sporttalk_count < 3:
