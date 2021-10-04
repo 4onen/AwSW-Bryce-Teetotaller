@@ -5,7 +5,7 @@ init python:
 label tt_bryce1_apartment:
     scene black with dissolvemed
     $ renpy.pause(0.5)
-    scene black with fade
+    stop music fadeout 1.0
     nvl clear
     window show
     if tt_bryce1_brycedrinks >= 3:
@@ -91,7 +91,7 @@ label tt_bryce1_apartment:
             c "Why are you trying to lock me in here?!"
             show bryce brow dk with dissolve
             $ renpy.pause(0.5)
-        "Bryce, you're drunk. We shouldn't do anything we'll regret." if brycedrinks < 4:
+        "Bryce, you're drunk. We shouldn't do anything we'll regret." if tt_bryce1_brycedrinks < 4:
             Br laugh dk "No, no."
             Br smirk dk "'s not what this is about."
             show bryce normal dk with dissolve
@@ -165,11 +165,11 @@ label tt_bryce1_apartment:
             pass
         "Reza wouldn't do that.":
             $ brycemood -= 1
-            Br brow "We also thought Reza wouldn't kill people."
+            Br brow dk "We also thought Reza wouldn't kill people."
             $ renpy.pause (1.0)
             c "Fine. Where do I sleep?"
         "That makes sense. Thanks.":
-            show bryce normal with dissolve
+            show bryce normal dk with dissolve
             $ brycemood += 1
 
     Br "The couch is the only thing close to a bed in here. Feel free to take that. I'll be over here on the floor."
@@ -179,10 +179,10 @@ label tt_bryce1_apartment:
     menu:
         "I'm not sleeping on that.":
             $ brycemood -= 1
-            Br brow "Then take the floor. That's really the best I can do."
+            Br brow dk "Then take the floor. That's really the best I can do."
             $ tt_bryce1_apartment_floor = True
         "Thanks...?":
-            Br normal "Sure. Don't mention it."
+            Br normal dk "Sure. Don't mention it."
             $ brycemood += 1
             $ tt_bryce1_apartment_floor = False
 
@@ -212,6 +212,7 @@ label tt_bryce1_apartment_morning:
         m "I awoke looking at an unfamiliar ceiling. For a moment, I wondered where I was before the events of last night all came back to me. As I sat up and looked around, I realized the thick scent of alcohol had wafted off the couch with me."
         show bryce laugh at right:
             ypos 1.2
+        with dissolvemed
         m "Bryce was still passed out by the door."
 
     c "Hey, Bryce."
@@ -237,10 +238,13 @@ label tt_bryce1_apartment_morning:
             $ brycemood += 1
             m "The dragon moved and let out a groan before he opened his eyes."
             show bryce brow with dissolve
+            $ renpy.pause (1.0)
 
     if tt_bryce1_brycedrinks < 4:
         show bryce normal with dissolve
-        show bryce at center with ease
+        show bryce:
+            ease 2.0 xanchor 0.5 xpos 0.5 yanchor 1.0 ypos 1.0
+        with ease
         Br normal "[player_name], you're here. Sorry about last night, I didn't mean to trap you."
         menu:
             "You literally did mean it, though.":
@@ -305,7 +309,7 @@ label tt_bryce1_apartment_morning:
             c "I guess..."
         else:
             c "If you can explain the smell on my clothes."
-            Br laugh "Maybe."
+            Br laugh "Maybe. Hopefully nobody will notice."
             show bryce normal with dissolve
         Br laugh "Maybe I should invite you over some other time, show you that there's more to the chief of police than getting drunk and dragging you home?"
         c "Wouldn't that be dragging me over to your place anyway?"
