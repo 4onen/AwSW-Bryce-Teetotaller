@@ -1,3 +1,6 @@
+init:
+    image tt_bryce1_apartment_night = "bg/in/apts/pad_night.png"
+
 init python:
     tt_bryce1_apartment_floor = False
 
