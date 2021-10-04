@@ -230,14 +230,14 @@ label tt_bryce1_apartment_morning:
             m "The dragon moved and let out a groan before he opened his eyes."
             show bryce brow with dissolve
             Br "Just as you do, occasionally, I bet."
-        "Wake up, fatso.":
+        "Wake up, fattie.":
             $ brycemood -= 1
             m "The dragon moved and let out a groan before he opened his eyes."
             show bryce stern with dissolve
             c "(That got him.)"
             Br "For your information, my kind does tend to look a little bigger than the others, but it also makes us the strongest."
             show bryce brow with dissolve
-        "Good morning, pal.":
+        "Good morning, sunshine":
             $ brycemood += 1
             m "The dragon moved and let out a groan before he opened his eyes."
             show bryce brow with dissolve
