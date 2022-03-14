@@ -89,8 +89,17 @@ init:
             adjust = drunkedness*random.randint(-4,4), drunkedness*random.randint(-4,4)
             renpy.set_mouse_pos(currposition[0] + 4*dir[0] + adjust[0], currposition[1] + 4*dir[1] + adjust[1])
 
+        class ThrowDart(renpy.ui.Action):
+            alt = "Throw Dart"
+
+            def __init__(self, drunkedness=1):
+                self.drunkedness = drunkedness
+
+            def __call__(self):
+                return renpy.get_mouse_pos()
+
     screen tt_bryce1_minigame_dart_targeting(drunkedness=0, is_debug=False):
-        key "mousedown_1" action [Return(True)]
+        key "mousedown_1" action tt_bryce1_minigame_darts_store.ThrowDart(drunkedness=drunkedness)
         if not is_debug:
             key "game_menu" action [Return(False)]
             timer 0.034 repeat True action Function(tt_bryce1_minigame_darts_store.shudder_mouse,drunkedness)
@@ -218,8 +227,7 @@ init:
             _return = False
             while not _return:
                 _return = renpy.call_screen('tt_bryce1_minigame_dart_targeting')
-            playerdartpos = renpy.get_mouse_pos()
-            return render_and_score_dart(playerdartpos,boardup,render_player_dart)
+            return render_and_score_dart(_return,boardup,render_player_dart)
         
         bryce_practice_targets = {
             0: [(923, 677), (931, 672), (1161, 738), (953, 633), (988, 646), (999, 684), (1057, 721), (879, 684), (1107, 596), (1092, 640), (877, 547), (1031, 672), (1101, 716), (899, 639), (803, 643), (1132, 731), (908, 650), (852, 652), (990, 797), (837, 693)],
