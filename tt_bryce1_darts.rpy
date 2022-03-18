@@ -89,17 +89,14 @@ init:
             adjust = drunkedness*random.randint(-4,4), drunkedness*random.randint(-4,4)
             renpy.set_mouse_pos(currposition[0] + 4*dir[0] + adjust[0], currposition[1] + 4*dir[1] + adjust[1])
 
-        class ThrowDart(renpy.ui.Action):
+        class ReturnMousePos(renpy.ui.Action):
             alt = "Throw Dart"
-
-            def __init__(self, drunkedness=1):
-                self.drunkedness = drunkedness
 
             def __call__(self):
                 return renpy.get_mouse_pos()
 
     screen tt_bryce1_minigame_dart_targeting(drunkedness=0, is_debug=False):
-        key "mousedown_1" action tt_bryce1_minigame_darts_store.ThrowDart(drunkedness=drunkedness)
+        key "mousedown_1" action tt_bryce1_minigame_darts_store.ReturnMousePos()
         if not is_debug:
             key "game_menu" action [Return(False)]
             timer 0.034 repeat True action Function(tt_bryce1_minigame_darts_store.shudder_mouse,drunkedness)
