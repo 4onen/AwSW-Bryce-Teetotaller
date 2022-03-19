@@ -131,6 +131,7 @@ init:
         T = renpy.curry(renpy.display.transform.Transform)
         @renpy.pure
         def render_player_dart(click_xy):
+            renpy.audio.sound.play("fx/tt_bryce1_dartthud2.wav")
             dart_state,x,y = get_dart_state(click_xy)
             if dart_state == "fall":
                 renpy.show('tt_bryce1_playerdarthit fall',[T(xpos=x,ypos=y)])
@@ -144,6 +145,7 @@ init:
 
         @renpy.pure
         def render_bryce_dart(click_xy):
+            renpy.audio.sound.play("fx/tt_bryce1_dartthud1.wav")
             dart_state,x,y = get_dart_state(click_xy)
             if dart_state == "fall":
                 renpy.show('tt_bryce1_brycedarthit fall',[T(xpos=x,ypos=y)])
