@@ -756,7 +756,7 @@ label tt_bryce1_minigame_darts_realgame0:
                 pass
     else: # 1 <= tt_bryce1_minigame_darts_store.s:
         if tt_bryce1_minigame_darts_store.s < 3:
-            Br "Oh."
+            Br "Oh. Well, I didn't miss."
         else:
             Br smirk "Ha!"
         menu:
