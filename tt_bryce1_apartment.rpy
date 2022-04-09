@@ -21,7 +21,7 @@ label tt_bryce1_apartment:
     else:
         n "I was glad I didn't drink, as it let me be there to catch him, and kept me from having any falls myself. The cool night air also helped keep him awake."
 
-    play sound "fx/door/open.wav"
+    play sound "fx/door/door_open.wav"
     n "I got the door for him, wanting to avoid worsening the clawmarks I could see around the handle from previous late-night entries."
     $ renpy.pause(0.5)
     n "Then..."

@@ -79,7 +79,7 @@ label tt_bryce1_tv:
     $ renpy.pause (0.6)
     show bare tt_bryce1_tvoff with dissolve
     $ renpy.pause (0.4)
-    play sound "fx/flicker.wav"
+    play sound "fx/flicker.ogg"
     show tt_bryce1_tvimage horrible at tt_bryce1_tvimage with dissolve
     show bryce normal flip with dissolve
     $ renpy.pause (0.3)
@@ -188,7 +188,7 @@ label tt_bryce1_tv:
             Br "They've got this oblong ball, like an egg but symmetrically..."
             show bryce stern flip with dissolve
             if tt_bryce1_brycedrinks > 3:
-                play sound "fx/chair.ogg"
+                play sound "fx/chair.wav"
                 m "He lifted a paw to gesture with, then stumbled to catch himself as he bumped into a chair."
             elif tt_bryce1_brycedrinks > 1:
                 m "He gestured with a paw, swaying slightly from his alcohol consumption."

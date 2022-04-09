@@ -320,7 +320,7 @@ label tt_bryce1_minigames_over:
                 Br "Uh-huh"
 
         if tt_bryce1_brycedrinks >= 2:
-            play sound "fx/chair.ogg"
+            play sound "fx/chair.wav"
             show bryce at Position(xpos=0.45,xanchor='center') with ease
             m "Bryce stood, knocking into a couple chairs as he made his way out toward the aisle."
             Br "Well, let's get you home."
