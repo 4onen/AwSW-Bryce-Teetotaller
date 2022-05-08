@@ -85,16 +85,19 @@ label tt_bryce1_dontdrink_callsite(tt_bryce1_talked_about_reza=False):
     menu:
         "No.":
             $ tt_bryce1_dontdrink = True
+            $ nodrinks = True
             c "You can't ask."
             $ brycemood -= 2
             Br stern "I see."
         "Medical reasons.":
             $ tt_bryce1_dontdrink = True
+            $ nodrinks = True
             c "I don't want to get too much into it. Put simply: I can't."
             Br sad "Damn. I'm sorry to hear that."
             c "Let's just move on."
         "Personal reasons.":
             $ tt_bryce1_dontdrink = True
+            $ nodrinks = True
             c "It's... complicated, and not exactly material for your first night out with someone."
             Br smirk "Not without enough alcohol?"
             c "No. That's... no."
@@ -102,6 +105,7 @@ label tt_bryce1_dontdrink_callsite(tt_bryce1_talked_about_reza=False):
             c "Let's just move on."
         "My faith prohibits it.":
             $ tt_bryce1_dontdrink = True
+            $ nodrinks = True
             Br "Your faith in what?"
             c "Humanity has a large number of religions, most describing some god or gods that created our world."
             c "I believe in one of these. And, in my religion's history, our creator sent us a message that we should not partake in alcohol consumption."
@@ -124,6 +128,7 @@ label tt_bryce1_dontdrink_callsite(tt_bryce1_talked_about_reza=False):
                     Br "You're doing yourself a favor."
                 "No, thanks.":
                     $ tt_bryce1_dontdrink = True
+                    $ nodrinks = True
                     $ brycemood -= 1
                     Br stern "Suit yourself."
                 "[[Leave.]":
@@ -181,6 +186,7 @@ label tt_bryce1_drink2_watered_down:
             python:
                 tt_bryce1_water = False
                 tt_bryce1_dontdrink = False
+                nodrinks = False
                 beer = True
             c "I mean, I guess I'm in another world and I'm already at the bar. If not tonight, am I going to keep making excuses?"
             Br smirk "That's the spirit."
