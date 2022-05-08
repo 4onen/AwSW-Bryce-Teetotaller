@@ -35,19 +35,9 @@ def tt_bryce1_link():
         .link_from('tt_bryce1_canon_return_contest') \
         .search_menu("I would, but I don't think I can beat someone like you.") \
         .add_choice("No. Light drinking, please.", jump='tt_bryce1_drink2_light') \
-        .search_menu("Heck, no.") \
-        .search_menu("That's not a blush!") \
-        .search_menu("I'm having a drinking contest with a dragon. How could I not love this?") \
-        .search_menu("That's my tactic, make you think that I'm struggling so you'll let your guard down.") \
-        .search_menu("Maybe. Having a lil' fun doesn't hurt, right?") \
+        .search_menu("Maybe. Having a lil' fun doesn't hurt, right?",depth=250) \
         .link_behind_from('tt_bryce1_canon_return_midcontest') \
-        .search_menu("Y-You never said that was a rule.") \
-        .search_menu("Why are you so damn attractive?") \
-        .search_menu("I think... it's yours.") \
-        .search_menu("If you think I'm giving up, you're mistaken. This isn't over.") \
-        .search_menu("I know when I've had enough, and it's now.") \
-        .search_menu("[[Leave.]") \
-        .search_menu("Put some pepper on his nose.") \
+        .search_menu("Put some pepper on his nose.",depth=250) \
         .branch() \
             .search_say("(Huh... that was actually the salt, not the pepper. Let's try that again.)") \
             .link_behind_from('tt_bryce1_pepperwake_canon') \
