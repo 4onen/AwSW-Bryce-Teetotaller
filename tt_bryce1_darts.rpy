@@ -233,6 +233,11 @@ init:
             1: [(925, 676), (970, 639), (1058, 569), (979, 770), (953, 612), (984, 746), (996, 806), (1006, 284), (951, 697), (941, 705), (923, 696), (982, 681), (997, 478), (968, 786), (960, 705), (954, 598), (947, 656), (878, 613), (894, 616), (921, 748)],
             2: [(903, 526), (960, 545), (1058, 582), (689, 590), (889, 577), (1019, 593), (1123, 544), (880, 509), (908, 620), (752, 536), (989, 524), (1006, 556), (1182, 546), (1148, 507), (946, 621), (1171, 538), (973, 538), (997, 561), (1143, 623), (1048, 489)]
         }
+        bryce_game_targets = {
+            0: {2: [(880,641),(904,689),(999,655)], 3: [(928,488),(998,487),(964,481)]},
+            1: {2: [(946,681),(956,374),(980,629)], 3: [(985,482),(995,569),(986,563)]},
+            2: {2: [(1025,594),(986,515),(876,576)], 3: [(1010, 574),(902, 600),(902,573)]},
+        }
         def bryce_throw(goal_score=None, cheat=False):
             # Goal_score 1 is illegal. Bryce doesn't go for 1s.
             renpy.show('bryce back flip',at_list=[renpy.python.store_dicts['store']['left']])
@@ -240,9 +245,11 @@ init:
             renpy.pause (0.5)
             if goal_score is None:
                 tgt = bryce_practice_targets[boardup][funplayed*3+throwcount]
-                return render_and_score_dart((int(tgt[0]),int(tgt[1])),boardup,render_bryce_dart)
             else:
-                return render_and_score_dart((950,700),boardup,render_bryce_dart)
+                # Eh. Cheat vs not cheat system seems annoying to implement.
+                # Instead, round 3 throws must always land. Others might not.
+                tgt = bryce_game_targets[boardup][goal_score][realgame-1]
+            return render_and_score_dart((int(tgt[0]),int(tgt[1])),boardup,render_bryce_dart)
 
 
 label tt_bryce1_minigame_darts:
