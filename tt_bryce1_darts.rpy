@@ -236,7 +236,7 @@ init:
         bryce_game_targets = {
             0: {2: [(880,641),(904,689),(999,655)], 3: [(928,488),(998,487),(964,481)]},
             1: {2: [(946,681),(956,374),(980,629)], 3: [(985,482),(995,569),(986,563)]},
-            2: {2: [(1025,594),(986,515),(876,576)], 3: [(1010, 574),(902, 600),(902,573)]},
+            2: {2: [(1025,594),(986,515),(876,576)], 3: [(1010, 574),(902, 600),(923,589)]},
         }
         def bryce_throw(goal_score=None, cheat=False):
             # Goal_score 1 is illegal. Bryce doesn't go for 1s.
@@ -331,7 +331,7 @@ label tt_bryce1_minigame_darts:
             $ tt_bryce1_minigame_darts_store.boardup = 1
         "Board C" if tt_bryce1_minigame_darts_store.boardc_available:
             $ tt_bryce1_minigame_darts_store.boardup = 2
-        "PointPicker" if False:
+        "PointPicker" if True:
             jump tt_bryce1_minigame_darts_pointpicker
         "I'm done with this." if any((tt_bryce1_minigame_darts_store.boarda_picked,tt_bryce1_minigame_darts_store.boardb_picked,tt_bryce1_minigame_darts_store.boardc_picked)):
             label tt_bryce1_minigame_darts_donewiththis:
