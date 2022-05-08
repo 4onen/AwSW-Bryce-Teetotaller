@@ -252,11 +252,16 @@ label tt_bryce1_apartment_morning:
         menu:
             "You literally did mean it, though.":
                 c "Something about not getting me murdered by Reza?"
-                $ brycemood -= 1
-                Br stern "Can't you accept an apology and move on?"
-                c "An apology for an action you don't regret?"
-                Br "I regret that I brought you back to my apartment instead of to your own, where that wouldn't be necessary. Isn't that sufficient?"
-                c "I'll think about it."
+                Br laugh "Can't you accept an apology and move on? You know what I mean."
+                menu:
+                    "Alright, sure.":
+                        $ renpy.pause(0.5)
+                    "An apology for an action you don't regret?":
+                        show bryce stern with dissolve
+                        $ brycemood -= 1
+                        $ renpy.pause(0.5)
+                        Br "I regret that I brought you back to my apartment instead of to your own, where that wouldn't be necessary. Isn't that sufficient?"
+                        c "I'll think about it."
             "Don't worry about it.":
                 c "I've slept in worse places. At least your apartment doesn't have bugs or stains."
                 $ brycemood += 1
