@@ -47,7 +47,7 @@ def tt_bryce1_link():
 @loadable_mod
 class AWSWMod(Mod):
     name = "Teetotaller"
-    version = "v0.2"
+    version = "v0.9"
     author = "4onen"
     dependencies = ["MagmaLink"]
 
