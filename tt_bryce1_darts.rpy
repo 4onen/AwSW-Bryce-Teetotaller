@@ -97,8 +97,8 @@ init:
 
     screen tt_bryce1_minigame_dart_targeting(drunkedness=0, is_debug=False):
         key "mousedown_1" action tt_bryce1_minigame_darts_store.ReturnMousePos()
+        key "game_menu" action [Return(False)]
         if not is_debug:
-            key "game_menu" action [Return(False)]
             timer 0.034 repeat True action Function(tt_bryce1_minigame_darts_store.shudder_mouse,drunkedness)
     
     python in tt_bryce1_minigame_darts_store:
@@ -113,7 +113,9 @@ init:
                 # Hit the board
                 return ("left" if x < 820 else ("right" if x > 1100 else "")),x,y
 
-            if x < 860:
+            if x <= 60 or x >= 1860:
+                return "fall",x,y
+            elif x < 860:
                 if 230 <= x:
                     return "fall",x,y
                 if 190 < x < 230:
@@ -127,6 +129,26 @@ init:
                 return ("right" if x > 1100 else ""),x,y
             else:
                 return "",x,y
+
+        @renpy.pure
+        def point_line_distance(p1x,p1y,p2x,p2y,x,y):
+            A=p1y-p2y
+            B=p2x-p1x
+            C=p1x*p2y-p1y*p2x
+            return abs(A*x+B*y+C)/math.sqrt(A*A+B*B)
+
+        @renpy.pure
+        def get_board_knocked_down(xy):
+            x,y = xy
+            # board knock down check
+            # board support cables run from (877,272) to (960,186)
+            #  and (960,186) to (1040,272)
+            if 860 < x < 1060 and y > 184:
+                if point_line_distance(877,272,960,186,x,y) < 5:
+                    return True
+                elif point_line_distance(960,186,1040,272,x,y) < 5:
+                    return True
+            return False
 
         T = renpy.curry(renpy.display.transform.Transform)
         @renpy.pure
@@ -203,8 +225,7 @@ init:
             if dart_state == "fall":
                 return -1
             elif not hit_target(x,y):
-                # TODO: check for board knock down
-                return -2
+                return -3 if get_board_knocked_down(click_xy) else -2
             else:
                 im = renpy.load_surface('dartboard/board%s.png'%chr(board+ord('a')))
                 px = im.get_at((x-624,y-204))
@@ -439,10 +460,10 @@ label tt_bryce1_minigame_darts:
                 else:
                     if tt_bryce1_minigame_darts_store.s == 3:
                         Br "Good throw."
-                    elif tt_bryce1_minigame_darts_store.s <= 0:
-                        Br "Miss. Ouch."
                     elif tt_bryce1_minigame_darts_store.s == -3:
                         jump tt_bryce1_minigame_darts_boardfall
+                    elif tt_bryce1_minigame_darts_store.s <= 0:
+                        Br "Miss. Ouch."
                     elif tt_bryce1_minigame_darts_store.s in [1, 2]:
                         pass
                     else:
@@ -553,7 +574,10 @@ label tt_bryce1_minigame_darts_boardfall:
         show waiter flip with dissolve
         $ renpy.pause (0.3)
         hide waiter with easeoutright
-        jump tt_bryce1_minigame_darts_boardselect
+        if tt_bryce1_minigame_darts_store.realgame > 0:
+            jump tt_bryce1_minigame_darts_competitive_boardselect
+        else:
+            jump tt_bryce1_minigame_darts_boardselect
     elif tt_bryce1_minigame_darts_store.boards_fallen == 2:
         show bryce brow at Position(xpos=0.85) with dissolve
         $ renpy.pause (0.8)
@@ -607,7 +631,10 @@ label tt_bryce1_minigame_darts_boardfall:
         show bryce stern flip with dissolve
         $ renpy.pause (0.3)
         hide bryce with easeoutright
-        jump tt_bryce1_minigame_darts_boardselect
+        if tt_bryce1_minigame_darts_store.realgame > 0:
+            jump tt_bryce1_minigame_darts_competitive_boardselect
+        else:
+            jump tt_bryce1_minigame_darts_boardselect
     elif tt_bryce1_minigame_darts_store.boards_fallen == 3:
         $ brycemood -= 1
         show bryce stern at Position(xpos=0.85) with dissolve
@@ -1149,7 +1176,7 @@ label tt_bryce1_minigame_darts_pointpicker:
     python in tt_bryce1_minigame_darts_store:
         _return = True
         while _return:
-            _return = renpy.call_screen('tt_bryce1_minigame_dart_targeting')
+            _return = renpy.call_screen('tt_bryce1_minigame_dart_targeting', is_debug=True)
             playerdartpos = renpy.get_mouse_pos()
             print(playerdartpos,render_and_score_dart(playerdartpos,boardup,render_player_dart))
     
