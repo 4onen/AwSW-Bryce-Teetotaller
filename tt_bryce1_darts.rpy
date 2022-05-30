@@ -114,6 +114,10 @@ init:
                 # Hit the board
                 return ("left" if x < 820 else ("right" if x > 1100 else "")),x,y
 
+            # Bounce off the pin
+            if (x-960)**2 + (y-198)**2 < 49:
+                return "fall",x,y
+
             if x <= 60 or x >= 1860:
                 return "fall",x,y
             elif x < 860:
