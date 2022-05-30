@@ -34,8 +34,9 @@ init:
     image tt_bryce1_playerdarthit = DynamicDisplayable(tt_player_dart_displayable,"dartboard/darthit.png")
 
     image tt_bryce1_darthit right brown = tt_BlueMap("dartboard/darthit2.png", "#8B4513") # Bryce
+    image tt_bryce1_darthit left brown = im.Flip(tt_BlueMap("dartboard/darthit2.png", "#8B4513"), horizontal=True)
     image tt_bryce1_brycedarthit right = 'tt_bryce1_darthit right brown'
-    image tt_bryce1_brycedarthit left = im.Flip('tt_bryce1_darthit right brown',horizontal=True)
+    image tt_bryce1_brycedarthit left = 'tt_bryce1_darthit left brown'
     image tt_bryce1_brycedarthit fall:
         'tt_bryce1_brycedart'
         size (50,150)
