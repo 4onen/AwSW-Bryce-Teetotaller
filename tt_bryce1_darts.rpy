@@ -355,7 +355,7 @@ label tt_bryce1_minigame_darts:
             $ tt_bryce1_minigame_darts_store.boardup = 1
         "Board C" if tt_bryce1_minigame_darts_store.boardc_available:
             $ tt_bryce1_minigame_darts_store.boardup = 2
-        "PointPicker" if True:
+        "PointPicker" if False:
             jump tt_bryce1_minigame_darts_pointpicker
         "I'm done with this." if any((tt_bryce1_minigame_darts_store.boarda_picked,tt_bryce1_minigame_darts_store.boardb_picked,tt_bryce1_minigame_darts_store.boardc_picked)):
             label tt_bryce1_minigame_darts_donewiththis:
