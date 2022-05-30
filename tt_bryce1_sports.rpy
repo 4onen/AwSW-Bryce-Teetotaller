@@ -182,8 +182,12 @@ label tt_bryce1_tv:
             Br normal flip "I suppose that makes sense. I'd prefer to stay in the game, though."
         "Runnerball." if tt_bryce1_minigame.sporttalk_runnerball == False:
             $ tt_bryce1_minigame.sporttalk_runnerball = True
-            c "It sounds like it's for runners specifically, but what is it about?"
-            Br laugh flip "Runners running with a ball!"
+            if mp.belief == "evolution" or sebastianfail == False:
+                c "It sounds like it's for runners specifically, but what is it about?"
+                Br laugh flip "Runners running with a ball!"
+            else:
+                c "What's a runner?"
+                Br laugh flip "Runners running with a ball! You know, runners, the dragons with two legs and the hands like yours."
             Br normal flip "I've had the rules to me explained once or twice, but I don't get them."
             Br "They've got this oblong ball, like an egg but symmetrically..."
             show bryce stern flip with dissolve
