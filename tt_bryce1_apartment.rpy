@@ -152,12 +152,12 @@ label tt_bryce1_apartment:
                             Br stern dk "[player_name], how is it this difficult for you to understand? People are {i}dead{/i}, and you're the closest person to the lone suspect."
                             Br "I'm in no state to walk you home, so I'm asking you to make the best of things we both--"
                             m "Taking my opportunity, I ran around the couch, making it to the door before he could get turned around to follow."
-                            show bryce angry dk with vpunch
+                            show bryce stern dk with vpunch
                             Br "[player_name]!"
                             scene black with fadequick
                             m "I bolted down the stairs and away from the apartment."
                             play sound "fx/door/doorclose3.wav"
-                            queue sound "fx/runstumblefall3.ogg"
+                            queue sound "fx/runstumblefall.ogg"
                             m "Bryce followed, tripping his way down with a tremendous crash."
                             m "Not stopping to see if the drunkard police chief was okay, I barely even slowed until I was most of the way home."
                             $ brycestatus = "bad"

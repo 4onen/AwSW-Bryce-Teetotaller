@@ -308,6 +308,8 @@ label tt_bryce1_tv:
         Br "Alright, I think it's time to pack up the TV. Don't want to spend all the bar's electricity."
         Br laugh "Waiter?"
         show bryce normal with dissolve
+        $ renpy.pause (0.3)
+        show bryce at right with ease
         show zhong serv b flip at left with easeinleft
         m "The waiter appeared, replacing Bryce's once-again empty drink. Before he could leave, Bryce caught him."
         $ tt_bryce1_brycedrinks += 1
@@ -316,6 +318,7 @@ label tt_bryce1_tv:
         show zhong serv b at left with dissolve
         $ renpy.pause (0.3)
         hide zhong with easeoutleft
+        show bryce at center with ease
         $ renpy.pause (0.3)
         show tt_bryce1_waiter_barcut at tt_bryce1_waiter_barcut_transform with dissolve
         hide tt_bryce1_tvimage with dissolvemed

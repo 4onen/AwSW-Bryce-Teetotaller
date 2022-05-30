@@ -180,7 +180,20 @@ label tt_bryce1_drink2_watered_down:
         "Yeah. Just water.":
             $ renpy.pause (0.5)
             Br stern "That's hardly a way to enjoy an evening out."
-            c "Well, I'm not exactly looking for an evening I can't remember."
+            menu:
+                "I'm not exactly looking for an evening I can't remember.":
+                    $ renpy.pause (0.5)
+                    $ brycemood -= 1
+                "That's not the kind of evening out I enjoy.":
+                    $ renpy.pause (0.5)
+                "I can't.":
+                    $ brycemood += 1
+                    c "Please stop pushing the point."
+                    Br "..."
+                "I don't want to.":
+                    $ brycemood += 1
+                    c "Please stop pushing the point."
+                    Br "..."
             jump tt_bryce1_drink2_lightordry
         "Maybe a little drink won't hurt.":
             python:
@@ -202,7 +215,8 @@ label tt_bryce1_drink2_no:
     Br stern "So you came out to a bar to not have anything? Just give it a try."
     m "Having made my decision clear, I'm not sure what else to do to get through to him. I waited in silence until the waiter arrived with the drink."
     $ renpy.pause (0.3)
-    show bryce normal at right with ease
+    show bryce normal with dissolve
+    show bryce at right with ease
     show waiter flip at left with easeinleft
     play sound "fx/glasses.wav"
     $ renpy.pause (0.2)

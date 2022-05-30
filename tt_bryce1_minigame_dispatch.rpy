@@ -140,6 +140,9 @@ label tt_bryce1_minigame_talk:
     if tt_bryce1_dontdrink == True:
         Br brow "Trying to find another way to word dry. Anti-alcohol."
         c "I just don't want any."
+    elif tt_bryce1_water == True:
+        Br brow "Trying to find another way to word dry. Anti-alcohol."
+        c "I just don't want any tonight."
     else:
         Br smirk "Sipping at your alcohol instead of slamming a few back."
         # c "That just doesn't sound like a fun evening."
@@ -198,7 +201,7 @@ label tt_bryce1_minigame_talk:
     hide waiter with easeoutleft
     
     $ renpy.pause (0.9)
-    show xith normal flip at Position(xpos=0.165) with easeinleft
+    show xith normal flip at Position(xpos=0.185) with easeinleft
     $ renpy.pause (0.3)
     if beer:
         Xi "Bryce, is your drinking partner tonight really taking it that slowly?"

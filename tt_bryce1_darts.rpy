@@ -296,6 +296,9 @@ label tt_bryce1_minigame_darts:
         player_misses = 0
         player_drinks = 0
 
+        offgame_misses = 0
+        offgame_bullseyes = 0
+
         boarda_available = True
         boarda_picked = False
         boardb_available = True
@@ -459,11 +462,32 @@ label tt_bryce1_minigame_darts:
                         hide bryce with dissolve
                 else:
                     if tt_bryce1_minigame_darts_store.s == 3:
-                        Br "Good throw."
+                        $ tt_bryce1_minigame_darts_store.offgame_bullseyes += 1
+                        if tt_bryce1_minigame_darts_store.offgame_bullseyes < 3:
+                            Br "Good throw."
+                        elif tt_bryce1_minigame_darts_store.offgame_bullseyes == 3:
+                            show bryce brow at right with dissolve
+                            Br "Damn. You've made three 3-pointers now."
+                            Br laugh "I don't know how I'm gonna compete with you!"
+                            menu:
+                                "Are we making it a competition?":
+                                    Br smirk "Aren't we?"
+                                    Br "I'd at least like to see if maybe I stand a chance."
+                                    c "I mean, I guess."
+                                    Br "Best out of three?"
+                                    c "Sure?"
+                                    jump tt_bryce1_minigame_darts_realgame0
+                                "We're just playing around. Don't worry about it.":
+                                    Br brow "Alright. I'll just keep going."
                     elif tt_bryce1_minigame_darts_store.s == -3:
                         jump tt_bryce1_minigame_darts_boardfall
                     elif tt_bryce1_minigame_darts_store.s <= 0:
-                        Br "Miss. Ouch."
+                        $ tt_bryce1_minigame_darts_store.offgame_misses += 1
+                        if tt_bryce1_minigame_darts_store.offgame_misses < 3:
+                            Br "Miss. Ouch."
+                        elif tt_bryce1_minigame_darts_store.offgame_misses == 3:
+                            Br brow "You do know the point of the game is to hit the scoring zones, right?"
+                            c "Yeah, yeah. I'm just messing around."
                     elif tt_bryce1_minigame_darts_store.s in [1, 2]:
                         pass
                     else:
@@ -943,10 +967,10 @@ label tt_bryce1_minigame_darts_realgame0:
             Br "Guess I'm not doing so well."
             menu:
                 "You're still in the running.":
-                    Br normal "Suppose so."
+                    Br normal flip "Suppose so."
                 "You're doing really well, considering.":
                     $ brycemood -= 1
-                    Br stern "Considering the alcohol, or the lack of hands?"
+                    Br stern flip "Considering the alcohol, or the lack of hands?"
                     Br "Forget it. Let's just play the last throw."
                 "On way more alcohol than me, though.":
                     $ brycemood += 1
@@ -977,7 +1001,7 @@ label tt_bryce1_minigame_darts_realgame0:
             menu:
                 "I played badly on purpose.":
                     c "I thought it would cheer you up to win at this."
-                    show bryce brow flip
+                    show bryce brow flip with dissolve
                     $ renpy.pause (0.5)
                     Br "It's not fun if we're counting points and pretending to play when we both know who's going to win."
                 "[[Say nothing.]":
@@ -1057,7 +1081,7 @@ label tt_bryce1_minigame_darts_realgame0:
             menu:
                 "I'm not turning this into a drinking game.":
                     $ brycemood -= 3
-                    Br stern "Have it your way."
+                    Br stern flip "Have it your way."
                 "[[Take your drink.]":
                     play sound "fx/gulp2.wav"
                     Br brow flip "Drinking now doesn't exactly help explain how you missed then."
