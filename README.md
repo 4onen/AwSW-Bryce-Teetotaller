@@ -10,4 +10,4 @@ This is an *Angels with Scaly Wings* mod for people who don't drink, but also do
 
 The Creative Commons 3.0 Attribution license can be found [here](https://creativecommons.org/licenses/by/3.0/).
 
-All other resource files were created wholesale by 4onen, or by him adapting *Angels with Scaly Wings* base-game files.
+All other resource files were created wholesale by 4onen, built atop Creative Commons assets, or by adapting *Angels with Scaly Wings* base-game files.
