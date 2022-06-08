@@ -84,7 +84,7 @@ label tt_bryce1_tv:
     show bryce normal flip with dissolve
     $ renpy.pause (0.3)
     hide tt_bryce1_waiter_barcut with dissolve
-    Br "Well, there you are. Sports. {w=2.0}Any questions?"
+    Br "Well, there you are. Sports. {w=2.0}Any questions?{w}"
     $ renpy.pause (0.8)
     c "Huh. I think we have that sport back home. Though obviously we don't have any flying."
     Br "What's it called there?"
