@@ -313,15 +313,14 @@ label tt_bryce1_tv:
         Br laugh "Waiter?"
         show bryce normal with dissolve
         $ renpy.pause (0.3)
-        show bryce at right with ease
-        show zhong serv b flip at left with easeinleft
+        show waiter flip at Position(xpos=0.1) with easeinleft
         m "The waiter appeared, replacing Bryce's once-again empty drink. Before he could leave, Bryce caught him."
         $ tt_bryce1_brycedrinks += 1
         Br "If you'd like to put the TV away, I think the ambassador's finished."
         Wr shy b flip "I am slightly busy at the moment. But thank you. I will put it away when I have time."
-        show zhong serv b at left with dissolve
+        show waiter at left with dissolve
         $ renpy.pause (0.3)
-        hide zhong with easeoutleft
+        hide waiter with easeoutleft
         show bryce at center with ease
         $ renpy.pause (0.3)
         show tt_bryce1_waiter_barcut at tt_bryce1_waiter_barcut_transform with dissolve
