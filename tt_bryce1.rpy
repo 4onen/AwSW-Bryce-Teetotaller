@@ -180,6 +180,7 @@ label tt_bryce1_drink2_watered_down:
         "Yeah. Just water.":
             $ renpy.pause (0.5)
             Br stern "That's hardly a way to enjoy an evening out."
+            label tt_bryce1_author_tract_enjoyment:
             menu:
                 "I'm not exactly looking for an evening I can't remember.":
                     $ renpy.pause (0.5)
@@ -346,10 +347,7 @@ label tt_bryce1_drink2_dontdrink:
             c "It's my thing with my body. Everyone else can do what they'd like."
             Br normal "That's a good way of thinking about it."
             Br brow "Still, dry is hardly a way to enjoy an evening out at a bar."
-            if brycemood < 0:
-                c "Well, I'm not exactly looking for an evening I can't remember."
-            else:
-                m "I shrugged, avoiding the topic of the difference of opinion."
+            jump tt_bryce1_author_tract_enjoyment
         "I'd like to avoid it.":
             $ nodrinks = True
             $ brycemood -= 1
