@@ -23,6 +23,37 @@ label tt_bryce1_chapterover:
     $ brycescenesfinished = 1
     jump _mod_fixjmp
 
+label tt_bryce1_skip_menu:
+    play sound "fx/system3.wav"
+    s "Drink with Bryce?"
+    menu:
+        "Yes. I want to drink with Bryce.":
+            jump tt_bryce1_skip_menu_return
+        "Yes, but only light drinking.":
+            $ beer = True
+        "No, I won't drink tonight.":
+            $ beer = False
+        "No, I don't drink.":
+            $ beer = False
+            $ nodrinks = True
+            $ tt_bryce1_dontdrink = True
+
+    play sound "fx/system3.wav"
+    s "As you wish.{cps=2}..{/cps}{w=1.0}{nw}"
+
+    scene black with dissolvemed
+    $ renpy.pause (1.0)
+    
+    $ persistent.skipnumber += 1
+    call skipcheck from tt_bryce1_skip_menu_skipcheck
+
+    scene pad at Pan ((0, 0), (0,360), 0.0)
+    show bryce normal at center
+    with dissolveslow
+    play music "mx/campfire.ogg" fadein 2.0
+
+    jump tt_bryce1_apartment_skip
+
 label tt_bryce1_drink1_waterforme:
     if brycemood >= 1:
         $ brycemood = 0

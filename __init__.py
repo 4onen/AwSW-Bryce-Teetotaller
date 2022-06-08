@@ -2,6 +2,14 @@ from modloader.modclass import Mod, loadable_mod
 import jz_magmalink as ml
 
 def tt_bryce1_link():
+    ( ml.find_label('bryce1')
+        .search_if('persistent.bryce1skip == True')
+        .branch()
+        .search_menu("Yes. I want to skip ahead.")
+        .branch()
+        .hook_to('tt_bryce1_skip_menu')
+    )
+
     contest = ml.find_label('waitmenu') \
         .search_menu("Nothing yet. I'll have something later, I think.") \
         .add_choice("Water for me.", jump='tt_bryce1_drink1_waterforme') \

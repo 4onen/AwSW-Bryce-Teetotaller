@@ -291,6 +291,7 @@ label tt_bryce1_apartment_morning:
         stop music fadeout 1.0
         jump tt_bryce1_chapterover_teetotaller
     elif brycemood <= 2:
+        label tt_bryce1_apartment_skip:
         if tt_bryce1_brycedrinks >= 4:
             Br stern "Damn, now I remember."
         Br normal "I'll admit it. That's normally not often how I spend evenings, but it wasn't terrible."
@@ -298,7 +299,7 @@ label tt_bryce1_apartment_morning:
         c "Deal."
         show bryce brow with dissolve
         Br "Wait... what time is it?"
-        c "Ugh..."
+        # c "Ugh..."
         Br "Damn, I should really get going, or I'll be late for work. You know how to get back to your apartment from here, right?"
         c "I think so."
         show bryce normal with dissolve
