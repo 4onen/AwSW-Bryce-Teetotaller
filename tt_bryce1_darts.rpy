@@ -775,7 +775,7 @@ label tt_bryce1_minigame_darts_realgame0:
                     Br stern "Have it your way."
                 "[[Take your drink.]":
                     $ brycemood += 1
-                    play sound "mx/gulping.wav"
+                    play sound "fx/gulping.wav"
                     $ renpy.pause (0.5)
                     $ tt_bryce1_minigame_darts_store.player_drinks += 1
                     Br laugh flip "Waiter, [player_name] is going to need another round!"
@@ -893,7 +893,7 @@ label tt_bryce1_minigame_darts_realgame0:
                         Br stern "Have it your way."
                     "[[Take your drink.]":
                         $ brycemood += 1
-                        play sound "mx/gulping.wav"
+                        play sound "fx/gulping.wav"
                         $ renpy.pause (0.5)
                         $ tt_bryce1_minigame_darts_store.player_drinks += 1
                         Br laugh flip "Waiter, [player_name] is going to need another!"

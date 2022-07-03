@@ -81,7 +81,7 @@ label tt_bryce1_drink1_waterforme:
                     show bryce normal with dissolve
                 "Maybe I'll just pass on drinking anything.":
                     $ brycemood -= 1
-                    show br stern with dissolve
+                    show bryce stern with dissolve
                 "Just water, thanks.":
                     $ tt_bryce1_water = True
                     Br normal "If you insist."

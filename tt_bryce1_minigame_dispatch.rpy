@@ -474,7 +474,7 @@ label tt_bryce1_minigames_over:
                     c "Come on. Let's get you home."
             "Poke him with a dart." if tt_bryce1_minigame.darts_suggested:
                 $ brycemood -= 1
-                play sound "fx/chair3.ogg"
+                play sound "fx/chair.wav"
                 show bryce brow with dissolve
                 Br "Ow! Hey! What was that?"
                 c "One of the dartboard darts."
