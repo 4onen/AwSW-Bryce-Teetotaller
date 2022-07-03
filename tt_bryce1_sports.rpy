@@ -7,7 +7,6 @@ init:
         size (248,284)
 
     image bare tt_bryce1_tvoff = "bg/in/baretv.png"
-    image bare tt_bryce1_tvon = "bg/in/baretvon.png"
 
     image tt_bryce1_tvimage dergfootball = "sportstv/dergfootball.png"
 
